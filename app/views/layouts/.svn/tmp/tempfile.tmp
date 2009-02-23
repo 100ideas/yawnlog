@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>YawnLog.com >> <%= controller.action_name %></title>
+        <link rel="shortcut icon" href="favicon.ico" />
+    	<%= stylesheet_link_tag 'style' %>
+    	
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="nav">
+	                <div id="logo"><%= image_tag "yawnlog_logo_beta_horz3.png", :alt=>"logo" %></div>
+                    <% if session[:user_id] %>
+                        <%= link_to ("Home", :controller => "home")%>
+                        <%= link_to ("Sleep", :controller => "sleeps")%>
+                        <%= link_to ("Share", :controller => "users", :action => "public_profiles")%>
+                        <%= link_to ("World", :controller => "users", :action => "public_profiles")%>
+                        <%= link_to "Settings", :controller => "users", :action => "edit"%>
+                        <%= link_to ("About", :controller => "home", :action => "about")%>
+                    <% end %>
+                </div>
+				<div id="login_box">
+                    <%= render :partial => "partials/login_box" %>
+                </div>
+            </div>
+            <div id="main">
+                <% if flash[:notice] %><p class="flash notice"><%= flash[:notice] %></p><br><br><% end %>
+                <%= yield %>
+            </div>
+            <div id="footer">
+                copyright &copy; 2009 hellosilo llc.
+            </div>
+        </div>
+    </body>
+</html>
